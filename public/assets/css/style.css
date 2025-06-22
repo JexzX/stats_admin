@@ -1,0 +1,50 @@
+/* General Styles */
+body {
+  background-color: #f8f9fa;
+  color: #212529;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Card Hover Effect */
+.card:hover {
+  transform: translateY(-5px);
+  transition: transform 0.3s ease;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Custom Badge */
+.badge {
+  padding: 0.5em 0.75em;
+  font-weight: 500;
+}
+
+/* Progress Bar */
+.progress-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .card {
+    margin-bottom: 1.5rem;
+  }
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card {
+  animation: fadeIn 0.5s ease forwards;
+}
