@@ -6,7 +6,7 @@ class AdminController extends BaseController
         [
             'name' => 'Ndasmui (JexzX)',
             'role' => 'Executive Admin',
-            'role_color' => 'darkblue',
+            'role_color' => '#00008B',
             'vehicles' => ['Sultan', 'Benson', 'Roadtrain'],
             'properties' => [
                 'temporary' => [
@@ -15,28 +15,48 @@ class AdminController extends BaseController
                 ],
                 'house' => 'None'
             ],
-            'stats' => ['Operator', 'Teknik', 'Programer', 'Administrator']
+            'stats' => ['Operator', 'Teknik', 'Programer', 'Administrator'],
+            'last_active' => '2 days ago',
+            'status' => 'Online'
         ],
-        // Data untuk admin lainnya...
+        // ... (other admins data)
     ];
 
     public function index()
     {
-        $data = [
+        return view('admin/index', [
             'title' => 'Database Admin',
             'admins' => $this->admins
-        ];
-        
-        return view('admin/index', $data);
+        ]);
     }
 
     public function detail($id)
     {
-        $data = [
-            'title' => 'Detail Admin',
-            'admin' => $this->admins[$id]
-        ];
-        
-        return view('admin/detail', $data);
+        return view('admin/detail', [
+            'title' => 'Admin Details',
+            'admin' => $this->admins[$id],
+            'id' => $id
+        ]);
+    }
+
+    public function search()
+    {
+        $query = $this->request->getGet('q');
+        $results = [];
+
+        if (!empty($query)) {
+            foreach ($this->admins as $admin) {
+                if (stripos($admin['name'], $query) !== false || 
+                    stripos($admin['role'], $query) !== false) {
+                    $results[] = $admin;
+                }
+            }
+        }
+
+        return view('admin/search', [
+            'title' => 'Search Results',
+            'results' => $results,
+            'query' => $query
+        ]);
     }
 }
